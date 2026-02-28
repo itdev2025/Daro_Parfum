@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DARO | Mukammal Parfyumeriya</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Background -->
+    <div class="bg-texture"></div>
+    <div class="bg-lines"></div>
+    <div class="bg-orb bg-orb-1"></div>
+    <div class="bg-orb bg-orb-2"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="header-left">
+            <button class="menu-toggle" id="menuToggle" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="logo-container">
+                <div class="logo">DARO</div>
+                <span class="logo-sub">Parfumerie</span>
+            </div>
+        </div>
+        <nav class="header-nav" id="headerNav">
+            <a href="#collections" onclick="closeMobileMenu()">Kollektsiyalar</a>
+            <a href="#sets" onclick="closeMobileMenu()">To'plamlar</a>
+            <a href="#catalog" onclick="closeMobileMenu()">Katalog</a>
+            <a href="#contacts" onclick="closeMobileMenu()">Kontaktlar</a>
+        </nav>
+        <div class="header-right">
+            <button class="search-toggle" onclick="toggleSearch()">
+                <i class="fas fa-search"></i>
+            </button>
+            <button class="wishlist-toggle" onclick="toggleWishlist()">
+                <i class="far fa-heart"></i>
+                <span class="wishlist-count" id="wishlistCount">0</span>
+            </button>
+            <button class="cart-btn" onclick="toggleCart()">
+                <i class="fas fa-shopping-bag"></i>
+                <span class="cart-count" id="cartCount">0</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Search Modal -->
+    <div class="search-modal" id="searchModal">
+        <div class="search-container">
+            <button class="search-close" onclick="toggleSearch()">&times;</button>
+            <div class="search-input-wrapper">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="M21 21l-4.35-4.35"/>
+                </svg>
+                <input type="text" id="searchInput" placeholder="Xushbo'y hidlarni qidiring..." oninput="searchProducts()">
+            </div>
+            <div class="search-results" id="searchResults"></div>
+        </div>
+    </div>
+
+    <!-- Wishlist Modal -->
+    <div class="wishlist-modal" id="wishlistModal">
+        <div class="wishlist-content">
+            <button class="wishlist-close" onclick="toggleWishlist()">&times;</button>
+            <div class="wishlist-header">
+                <h2>Sevimlilar</h2>
+                <p>Saqlangan xushbo'y hidlar</p>
+            </div>
+            <div class="wishlist-items" id="wishlistItems">
+                <div class="wishlist-empty">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                    </svg>
+                    <p>Sevimlilar ro'yxati bo'sh</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="collections">
+        <div class="hero-content">
+            <span class="hero-eyebrow reveal">Mukammal parfyumeriya</span>
+            <h1 class="reveal-delay-1"><em>Yaratish</em> san'ati<br>xushbo'y hidlar</h1>
+            <div class="hero-divider reveal-delay-2"></div>
+            <p class="reveal-delay-3">Har bir not o'z hikoyasini aytadigan murakkab kompozitsiyalar dunyosini kashf eting. Dunyo bo'ylab tanilgan eng yaxshi parfyumeriya uylarining merosi</p>
+            <div class="hero-cta reveal-delay-4">
+                <a href="#catalog">Kollektsiyani ko'rish</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="hero-bottle">
+                <svg viewBox="0 0 200 300" fill="none">
+                    <defs>
+                        <linearGradient id="heroBottleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#c9a962;stop-opacity:0.9" />
+                            <stop offset="50%" style="stop-color:#e8d5a3;stop-opacity:0.8" />
+                            <stop offset="100%" style="stop-color:#c9a962;stop-opacity:0.9" />
+                        </linearGradient>
+                        <linearGradient id="heroLiquidGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#8b6914;stop-opacity:0.6" />
+                            <stop offset="50%" style="stop-color:#c9a962;stop-opacity:0.4" />
+                            <stop offset="100%" style="stop-color:#8b6914;stop-opacity:0.6" />
+                        </linearGradient>
+                        <filter id="heroGlow">
+                            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                            <feMerge>
+                                <feMergeNode in="coloredBlur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                    </defs>
+                    <rect x="60" y="80" width="80" height="220" rx="8" fill="url(#heroBottleGrad)" filter="url(#heroGlow)"/>
+                    <rect x="70" y="100" width="60" height="180" rx="4" fill="url(#heroLiquidGrad)"/>
+                    <rect x="65" y="40" width="70" height="45" rx="4" fill="url(#heroBottleGrad)"/>
+                    <rect x="80" y="20" width="40" height="25" rx="3" fill="#c9a962"/>
+                    <rect x="90" y="8" width="20" height="15" rx="2" fill="#a68b4b"/>
+                    <line x1="100" y1="150" x2="100" y2="250" stroke="#c9a962" stroke-width="1" opacity="0.3"/>
+                </svg>
+            </div>
+            <div class="hero-particles">
+                <span></span><span></span><span></span><span></span><span></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filters -->
+    <section class="filters" id="catalog">
+        <div class="filter-group">
+            <button class="filter-btn active" data-gender="all" onclick="filterGender('all')">Barcha xushbo'y hidlar</button>
+            <button class="filter-btn" data-gender="female" onclick="filterGender('female')">Ayollar</button>
+            <button class="filter-btn" data-gender="male" onclick="filterGender('male')">Erkaklar</button>
+        </div>
+        <div class="filter-group">
+            <button class="filter-btn active" data-set="all" onclick="filterSet('all')">Barcha</button>
+            <button class="filter-btn" data-set="premium" onclick="filterSet('premium')">Premium</button>
+            <button class="filter-btn" data-set="standard" onclick="filterSet('standard')">Standart</button>
+        </div>
+    </section>
+
+    <!-- Sets Section -->
+    <section class="sets-section" id="sets">
+        <span class="section-label reveal">Maxsus takliflar</span>
+        <h2 class="section-title reveal-delay-1">Eksklyuziv to'plamlar</h2>
+        <div class="sets-grid">
+            <div class="set-card reveal-delay-2">
+                <span class="set-eyebrow">Premium</span>
+                <h3 class="set-name">Royal Collection</h3>
+                <p class="set-description">Premium klassdagi 4 ta noyob xushbo'y hidning maxsus to'plami. Har bir flakon - kichik san'at asari. Mukammallikni qadrlaydiganlar uchun eng yaxshi tanlov.</p>
+                <div class="set-meta">
+                    <span class="set-price">28 500 000 so'm</span>
+                    <button class="set-btn" onclick="addSetToCart('Royal Collection', 28500000, 'ROYAL-SET-001')">
+                        <i class="fas fa-shopping-bag"></i>
+                    </button>
+                </div>
+                <button class="set-wishlist" onclick="toggleWishlistItem('Royal Collection')">
+                    <i class="far fa-heart"></i>
+                </button>
+            </div>
+            <div class="set-card reveal-delay-3">
+                <span class="set-eyebrow">Standart</span>
+                <h3 class="set-name">Essentiel</h3>
+                <p class="set-description">Kundalik foydalanish uchun 4 ta universal xushbo'y hidning to'plami. Hech qachon eskirmaydigan klassik kompozitsiyalar. Parfyumeriya bilan tanishish uchun ajoyib boshlanish.</p>
+                <div class="set-meta">
+                    <span class="set-price">14 900 000 so'm</span>
+                    <button class="set-btn" onclick="addSetToCart('Essentiel', 14900000, 'ESSENTIEL-SET-001')">
+                        <i class="fas fa-shopping-bag"></i>
+                    </button>
+                </div>
+                <button class="set-wishlist" onclick="toggleWishlistItem('Essentiel')">
+                    <i class="far fa-heart"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products-section">
+        <span class="section-label reveal">Katalog</span>
+        <h2 class="section-title reveal-delay-1">Xushbo'y hidlar</h2>
+        <div class="products-grid" id="productsGrid">
+            <!-- Products will be rendered here -->
+        </div>
+    </section>
+
+    <!-- Quick View Modal -->
+    <div class="quick-view-modal" id="quickViewModal">
+        <div class="quick-view-content">
+            <button class="quick-view-close" onclick="closeQuickView()">&times;</button>
+            <div class="quick-view-body" id="quickViewBody">
+                <!-- Quick view content will be rendered here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Cart Button (Mobile) -->
+    <button class="floating-cart" onclick="toggleCart()">
+        <i class="fas fa-shopping-bag"></i>
+        <span class="floating-cart-count" id="floatingCartCount">0</span>
+    </button>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" id="scrollTop" onclick="scrollToTop()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 19V5M5 12l7-7 7 7"/>
+        </svg>
+    </button>
+
+    <!-- Footer -->
+    <footer id="contacts">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="logo">LUMIÈRE</div>
+                <p>LUMIÈRE mukammal parfyumeriya do'koni - eng yaxshi xushbo'y hidlar joylashgan maxsus makon. Biz dunyodagi eng so'nggi va sifatli xushbo'y hidlarni sizga taqdim etamiz.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Navigatsiya</h4>
+                <a href="#collections">Kollektsiyalar</a>
+                <a href="#sets">To'plamlar</a>
+                <a href="#catalog">Katalog</a>
+                <a href="#contacts">Kontaktlar</a>
+            </div>
+            <div class="footer-section">
+                <h4>Kontaktlar</h4>
+                <p style="color: var(--text-secondary); font-size: 13px; line-height: 1.8;">
+                    Toshkent, Amir Temur ko'chasi<br>
+                    +998 90 123-45-67<br>
+                    info@lumiere-parfume.uz
+                </p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2024 LUMIÈRE PARFUMERIE. BARCHA HUQUQLAR QO'RIQLANADI.
+        </div>
+    </footer>
+
+    <!-- Cart Modal -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-content">
+            <button class="cart-close" onclick="toggleCart()">&times;</button>
+            <div class="cart-header">
+                <div>
+                    <h2 class="cart-title">Sizning savatingiz</h2>
+                    <p class="cart-subtitle">Tanlangan xushbo'y hidlar</p>
+                </div>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <div class="cart-empty">
+                    <svg class="cart-empty-icon" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5">
+                        <path d="M6 6h15l-1.5 9h-12z"/>
+                        <circle cx="9" cy="20" r="1"/>
+                        <circle cx="18" cy="20" r="1"/>
+                        <path d="M6 6L5 3H2"/>
+                    </svg>
+                    <p>Savatingiz bo'sh</p>
+                    <span>Xushbo'y hidlarni qo'shing</span>
+                </div>
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <span class="cart-total-label">Jami</span>
+                    <span class="cart-total-price" id="totalPrice">0 so'm</span>
+                </div>
+                <button class="checkout-btn" id="checkoutBtn" onclick="checkout()">Buyurtma berish</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <span class="toast-icon">✓</span>
+        <span class="toast-message">Savatga qo'shildi</span>
+    </div>
+
+    <!-- Order Modal -->
+    <div class="order-modal" id="orderModal">
+        <div class="order-content">
+            <button class="order-close" onclick="closeOrderModal()">&times;</button>
+            <div class="order-header">
+                <h2>Buyurtma tasdiqlash</h2>
+                <p>Quyidagi ma'lumotlarni to'ldiring</p>
+            </div>
+            <div class="order-form">
+                <div class="form-group">
+                    <label for="customerName">Ismingiz</label>
+                    <input type="text" id="customerName" placeholder="Ismingizni kiriting" required>
+                </div>
+                <div class="form-group">
+                    <label for="customerPhone">Telefon raqamingiz</label>
+                    <input type="tel" id="customerPhone" placeholder="+998 90 123-45-67" required>
+                </div>
+                <div class="form-group">
+                    <label for="customerTelegram">Telegram username</label>
+                    <input type="text" id="customerTelegram" placeholder="@username" required>
+                </div>
+                <div class="form-group">
+                    <label for="deliveryMethod">Yetkazib berish usuli</label>
+                    <select id="deliveryMethod" onchange="toggleDeliveryAddress()">
+                        <option value="">Tanlang...</option>
+                        <option value="delivery">Yetkazib berish</option>
+                        <option value="pickup">O'zim olib ketaman</option>
+                    </select>
+                </div>
+                <div class="form-group" id="deliveryAddressGroup" style="display: none;">
+                    <label for="deliveryAddress">Yetkazib berish manzili</label>
+                    <textarea id="deliveryAddress" placeholder="Manzilingizni kiriting" rows="2"></textarea>
+                </div>
+                <div class="order-summary">
+                    <h4>Buyurtma tafsilotlari</h4>
+                    <div id="orderItems"></div>
+                    <div class="order-total">
+                        <span>Jami:</span>
+                        <span id="orderTotal">0 so'm</span>
+                    </div>
+                </div>
+                <button class="submit-order-btn" onclick="submitOrder()">Telegram orqali buyurtma berish</button>
+            </div>
+        </div>
+    </div>
+
+<script src="./about.js"></script>
+</body>
+</html>
